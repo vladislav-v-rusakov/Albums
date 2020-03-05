@@ -1,6 +1,5 @@
 package com.vladus177.albums.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import dagger.Binds
@@ -18,9 +17,7 @@ import com.vladus177.albums.data.remote.AlbumsRestApi
 import com.vladus177.albums.data.remote.AlbumsRestApiFactory
 import javax.inject.Qualifier
 import javax.inject.Singleton
-import androidx.core.content.ContextCompat.getSystemService
 import android.net.ConnectivityManager
-import androidx.core.content.ContextCompat.getSystemService
 import com.vladus177.albums.common.util.NetworkStateManager
 
 
@@ -40,8 +37,7 @@ object ApplicationModule {
     @AlbumsRemoteDataSource
     @Provides
     fun provideAlbumsRemoteDataSource(
-        restApi: AlbumsRestApi,
-        ioDispatcher: CoroutineDispatcher
+        restApi: AlbumsRestApi
     ): AlbumsDataSource {
         return AlbumsRemoteDataSource(restApi)
     }

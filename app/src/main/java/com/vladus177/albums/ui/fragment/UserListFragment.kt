@@ -19,11 +19,11 @@ import javax.inject.Inject
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.vladus177.albums.common.view.DynamicInformation
 import com.vladus177.albums.common.util.NetworkStateManager
+import com.vladus177.albums.ui.adapter.OnItemClickListener
 
 
+class UserListFragment : DaggerFragment(), OnItemClickListener {
 
-
-class UserListFragment : DaggerFragment() {
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject lateinit var usersListMapper: UserViewMapper
     @Inject lateinit var networkStateManager: NetworkStateManager
@@ -47,7 +47,6 @@ class UserListFragment : DaggerFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
 
         setupListAdapter()
@@ -93,13 +92,19 @@ class UserListFragment : DaggerFragment() {
         }
     }
 
-    private fun openUserAlbums(userId: Long) {
-        val action = UserListFragmentDirections.actionUserListFragmentToAlbumsListFragment()
-        findNavController().navigate(action)
+    override fun onItemClicked(userId: Long?) {
+        let {
+            val action = UserListFragmentDirections.actionUserListFragmentToAlbumsListFragment(userId!!)
+            findNavController().navigate(action)
+        }
+    }
+
+    override fun onFavoriteClicked(userId: Long?, favorite: Boolean) {
+        viewModel.setFavorite(userId, favorite)
     }
 
     private fun setupListAdapter() {
-        listAdapter = UsersListAdapter()
+        listAdapter = UsersListAdapter(this)
         viewDataBinding.userList.adapter = listAdapter
         viewDataBinding.userList.addItemDecoration(
             DividerItemDecoration(

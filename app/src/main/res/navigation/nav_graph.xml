@@ -18,6 +18,30 @@
         android:name="com.vladus177.albums.ui.fragment.AlbumListFragment"
         android:label="Albums">
 
+        <action
+            android:id="@+id/action_albumListFragment_to_imageListFragment"
+            app:destination="@id/imageListFragment" />
+        <argument
+            android:name="userId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_albumListFragment_to_userListFragment"
+            app:destination="@id/usersFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/imageListFragment"
+        android:name="com.vladus177.albums.ui.fragment.ImageListFragment"
+        android:label="Images">
+
+        <argument
+            android:name="albumId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_imageListFragment_to_albumListFragment"
+            app:destination="@id/usersFragment" />
+
     </fragment>
 
 </navigation>
