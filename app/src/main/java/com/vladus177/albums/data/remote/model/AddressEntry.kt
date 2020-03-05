@@ -1,11 +1,11 @@
-package vladus177.com.albums.data.remote.model
+package com.vladus177.albums.data.remote.model
 
 import com.google.gson.annotations.SerializedName
-import vladus177.com.albums.data.Constants.USER_CITY
-import vladus177.com.albums.data.Constants.USER_LOCATION
-import vladus177.com.albums.data.Constants.USER_STREET
-import vladus177.com.albums.data.Constants.USER_SUITE
-import vladus177.com.albums.data.Constants.USER_ZIPCODE
+import com.vladus177.albums.data.Constants.USER_CITY
+import com.vladus177.albums.data.Constants.USER_LOCATION
+import com.vladus177.albums.data.Constants.USER_STREET
+import com.vladus177.albums.data.Constants.USER_SUITE
+import com.vladus177.albums.data.Constants.USER_ZIPCODE
 
 
 data class AddressEntry(
