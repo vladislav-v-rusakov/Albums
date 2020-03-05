@@ -1,0 +1,28 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="album"
+            type="com.vladus177.albums.ui.model.AlbumView" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_album_item"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/list_item_padding"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/list_item_padding">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@{album.title}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+    </LinearLayout>
+</layout>

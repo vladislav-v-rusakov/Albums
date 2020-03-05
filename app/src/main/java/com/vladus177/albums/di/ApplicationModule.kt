@@ -5,13 +5,11 @@ import androidx.room.Room
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import com.vladus177.albums.data.AlbumRepositoryImpl
 import com.vladus177.albums.data.AlbumsDataSource
 import com.vladus177.albums.data.AlbumsRepository
-import com.vladus177.albums.data.local.AlbumsLocalDataSource
-import com.vladus177.albums.data.local.UsersDatabase
+import com.vladus177.albums.data.local.UserDatabase
 import com.vladus177.albums.data.remote.AlbumsRemoteDataSource
 import com.vladus177.albums.data.remote.AlbumsRestApi
 import com.vladus177.albums.data.remote.AlbumsRestApiFactory
@@ -19,6 +17,8 @@ import javax.inject.Qualifier
 import javax.inject.Singleton
 import android.net.ConnectivityManager
 import com.vladus177.albums.common.util.NetworkStateManager
+import com.vladus177.albums.data.local.AlbumDatabase
+import com.vladus177.albums.data.local.AlbumsLocalDataSource
 
 
 @Module(includes = [ApplicationModuleBinds::class])
@@ -47,29 +47,34 @@ object ApplicationModule {
     @AlbumsLocalDataSource
     @Provides
     fun provideAlbumsLocalDataSource(
-        database: UsersDatabase,
-        ioDispatcher: CoroutineDispatcher
+        userDatabase: UserDatabase,
+        albumDatabase: AlbumDatabase
     ): AlbumsDataSource {
         return AlbumsLocalDataSource(
-            database.usersDao(), ioDispatcher
+            userDatabase.usersDao(),
+            albumDatabase.albumsDao()
         )
     }
-
-    /*@JvmStatic
-    @Singleton
-    @Provides
-    fun provideAlbumsRestApi(): AlbumsRestApi {
-        return AlbumsRestApiFactory().albumsApi
-    }*/
 
     @JvmStatic
     @Singleton
     @Provides
-    fun provideDataBase(context: Context): UsersDatabase {
+    fun provideUserDataBase(context: Context): UserDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
-            UsersDatabase::class.java,
+            UserDatabase::class.java,
             "Users.db"
+        ).build()
+    }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideAlbumsDataBase(context: Context): AlbumDatabase {
+        return Room.databaseBuilder(
+            context.applicationContext,
+            AlbumDatabase::class.java,
+            "Album.db"
         ).build()
     }
 

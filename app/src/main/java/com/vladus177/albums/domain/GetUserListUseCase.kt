@@ -6,15 +6,7 @@ import com.vladus177.albums.domain.model.UserModel
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
-/*
-class GetUsersListUseCase @Inject constructor(private val albumsRepository: AlbumsRepository) {
-
-    suspend operator fun invoke(forceUpdate: Boolean): Result<List<UserModel>> =
-        albumsRepository.getAllUsers(forceUpdate)
-}*/
-
-
-class GetUsersListUseCase @Inject constructor(private val albumsRepository: AlbumsRepository) : ResultUseCase<Boolean, List<UserModel>>(
+class GetUserListUseCase @Inject constructor(private val albumsRepository: AlbumsRepository) : ResultUseCase<Boolean, List<UserModel>>(
 backgroundContext = Dispatchers.IO,
 foregroundContext = Dispatchers.Main
 ) {

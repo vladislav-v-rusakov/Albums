@@ -2,6 +2,7 @@ package com.vladus177.albums.data
 
 import com.vladus177.albums.domain.model.UserModel
 import com.vladus177.albums.common.Result
+import com.vladus177.albums.domain.model.AlbumModel
 
 interface AlbumsRepository {
 
@@ -14,5 +15,10 @@ interface AlbumsRepository {
     suspend fun saveUser(user: UserModel)
 
     suspend fun setFavoriteUser(user: UserModel, favorite: Boolean)
+
+
+    suspend fun getAlbumsByUserId(forceUpdate: Boolean, userId: Long): List<AlbumModel>
+
+    suspend fun getAllAlbums(forceUpdate: Boolean): List<AlbumModel>
 
 }

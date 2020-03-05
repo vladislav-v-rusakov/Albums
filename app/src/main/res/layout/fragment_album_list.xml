@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <com.vladus177.albums.common.view.DynamicInformation
-            android:id="@+id/info"
+            android:id="@+id/di_album_info"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

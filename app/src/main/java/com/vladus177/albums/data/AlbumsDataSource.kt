@@ -1,5 +1,6 @@
 package com.vladus177.albums.data
 
+import com.vladus177.albums.data.remote.model.AlbumEntry
 import com.vladus177.albums.data.remote.model.UserEntry
 import com.vladus177.albums.domain.model.UserModel
 
@@ -13,5 +14,9 @@ interface AlbumsDataSource {
     suspend fun saveUser(user: UserModel)
 
     suspend fun setFavoriteUser(user: UserModel, favorite: Boolean)
+
+    suspend fun getAlbumsByUserId(userId: Long): List<AlbumEntry>
+
+    suspend fun getAllAlbums(): List<AlbumEntry>
 
 }

@@ -40,15 +40,14 @@ class UserListFragment : DaggerFragment(), OnItemClickListener {
         viewDataBinding = FragmentUsersListBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
         }
-        dynamicInfo = viewDataBinding.info
-        dynamicInfo.setActionButtonClickListener(clickListener = { loadUserList(true) } )
+        dynamicInfo = viewDataBinding.diUserInfo
+        dynamicInfo.setActionButtonClickListener(clickListener = { loadUserList(true) })
         return viewDataBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
-
         setupListAdapter()
         setupObserver()
         if (networkStateManager.isConnectedOrConnecting) {
@@ -56,20 +55,19 @@ class UserListFragment : DaggerFragment(), OnItemClickListener {
         } else {
             dynamicInfo.showConnectionError()
         }
-
     }
 
-    private fun loadUserList(forceUpdate: Boolean ) {
+    private fun loadUserList(forceUpdate: Boolean) {
         viewModel.loadUserList(forceUpdate)
     }
 
     private fun setupObserver() {
         with(viewModel) {
-            observe(userLiveData, ::feedObserver)
+            observe(userLiveData, ::userDataObserver)
         }
     }
 
-    private fun feedObserver(result: Result<List<UserModel>>?) {
+    private fun userDataObserver(result: Result<List<UserModel>>?) {
         when (result) {
             is Result.OnLoading -> {
                 dynamicInfo.showLoading()
@@ -83,6 +81,8 @@ class UserListFragment : DaggerFragment(), OnItemClickListener {
                 }
                 listAdapter.submitList(userList)
             }
+            is Result.OnEmpty -> {
+            }
             is Result.OnError -> {
                 dynamicInfo.hideLoading()
             }
@@ -94,7 +94,8 @@ class UserListFragment : DaggerFragment(), OnItemClickListener {
 
     override fun onItemClicked(userId: Long?) {
         let {
-            val action = UserListFragmentDirections.actionUserListFragmentToAlbumsListFragment(userId!!)
+            val action =
+                UserListFragmentDirections.actionUserListFragmentToAlbumsListFragment(userId!!)
             findNavController().navigate(action)
         }
     }

@@ -4,6 +4,7 @@ object Constants {
 
     const val BASE_URL = "https://jsonplaceholder.typicode.com"
 
+    //User
     const val USER_ID = "id"
     const val USER_NAME = "name"
     const val USER_ALIAS = "username"
@@ -23,4 +24,9 @@ object Constants {
     const val USER_CATCH_PHRASE = "catchPhrase"
     const val USER_BS = "bs"
     const val USER_IS_FAVORITE = "favorite"
+
+    //Album
+    const val ALBUM_USER_ID = "userId"
+    const val ALBUM_ID = "id"
+    const val ALBUM_TITLE = "title"
 }
