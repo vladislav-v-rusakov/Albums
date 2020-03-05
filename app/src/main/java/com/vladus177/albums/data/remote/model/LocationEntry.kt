@@ -1,8 +1,8 @@
-package vladus177.com.albums.data.remote.model
+package com.vladus177.albums.data.remote.model
 
 import com.google.gson.annotations.SerializedName
-import vladus177.com.albums.data.Constants.USER_LAT
-import vladus177.com.albums.data.Constants.USER_LNG
+import com.vladus177.albums.data.Constants.USER_LAT
+import com.vladus177.albums.data.Constants.USER_LNG
 
 data class LocationEntry(
     @SerializedName(USER_LAT) val latitude: String?,

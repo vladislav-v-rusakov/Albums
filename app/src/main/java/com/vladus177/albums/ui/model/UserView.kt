@@ -1,4 +1,4 @@
-package com.vladus177.albums.presentation.model
+package com.vladus177.albums.ui.model
 
 data class UserView (
     val id: Long?,
@@ -8,5 +8,6 @@ data class UserView (
     val address: AddressView?,
     val phone: String?,
     val website: String?,
-    val company: CompanyView?
+    val company: CompanyView?,
+    val isFavorite: Boolean
 )

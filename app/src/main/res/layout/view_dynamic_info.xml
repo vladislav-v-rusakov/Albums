@@ -1,6 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</LinearLayout>
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackgroundWhite"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xlarge"
+            android:gravity="center_horizontal"
+            android:paddingTop="@dimen/space_extra_xxsmall"
+            android:paddingBottom="@dimen/space_extra_xxsmall"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xlarge"
+            android:paddingTop="@dimen/space_extra_xxsmall"
+            android:paddingBottom="@dimen/space_extra_xxsmall"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
+            tools:text="Message" />
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{isLoading ? View.VISIBLE : View.INVISIBLE}"
+            android:layout_marginTop="@dimen/space_xlarge" />
+
+        <ImageView
+            android:id="@+id/iv_info_icon"
+            android:layout_width="@dimen/icon_info_size"
+            android:layout_height="@dimen/icon_info_size"
+            android:layout_marginTop="@dimen/space_xlarge"
+            tools:ignore="ContentDescription"
+            android:src="@drawable/ic_error_outline_24dp"
+            android:visibility="@{isLoading ? View.GONE : View.VISIBLE}" />
+
+        <Button
+            android:id="@+id/btn_action"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{isLoading ? View.INVISIBLE : View.VISIBLE}"
+            android:layout_marginTop="@dimen/space_xlarge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/reload" />
+
+    </LinearLayout>
+</layout>

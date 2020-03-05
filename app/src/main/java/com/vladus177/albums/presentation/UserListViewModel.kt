@@ -7,7 +7,7 @@ import com.vladus177.albums.domain.model.UserModel
 import com.vladus177.albums.ui.mapper.UserViewMapper
 import javax.inject.Inject
 
-class UsersListViewModel @Inject constructor(
+class UserListViewModel @Inject constructor(
     private val getUsersListUseCase: GetUsersListUseCase,
     private val mapper: UserViewMapper
 ) : ViewModel() {

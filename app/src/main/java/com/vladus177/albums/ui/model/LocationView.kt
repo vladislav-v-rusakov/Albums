@@ -1,4 +1,4 @@
-package com.vladus177.albums.presentation.model
+package com.vladus177.albums.ui.model
 
 data class LocationView (
     val latitude: String?,

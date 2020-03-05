@@ -1,24 +1,24 @@
-package vladus177.com.albums.data.local.model
+package com.vladus177.albums.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import vladus177.com.albums.data.Constants.USER_ALIAS
-import vladus177.com.albums.data.Constants.USER_BS
-import vladus177.com.albums.data.Constants.USER_CATCH_PHRASE
-import vladus177.com.albums.data.Constants.USER_CITY
-import vladus177.com.albums.data.Constants.USER_COMPANY_NAME
-import vladus177.com.albums.data.Constants.USER_EMAIL
-import vladus177.com.albums.data.Constants.USER_ID
-import vladus177.com.albums.data.Constants.USER_IS_FAVORITE
-import vladus177.com.albums.data.Constants.USER_LAT
-import vladus177.com.albums.data.Constants.USER_LNG
-import vladus177.com.albums.data.Constants.USER_NAME
-import vladus177.com.albums.data.Constants.USER_PHONE
-import vladus177.com.albums.data.Constants.USER_STREET
-import vladus177.com.albums.data.Constants.USER_SUITE
-import vladus177.com.albums.data.Constants.USER_WEBSITE
-import vladus177.com.albums.data.Constants.USER_ZIPCODE
+import com.vladus177.albums.data.Constants.USER_ALIAS
+import com.vladus177.albums.data.Constants.USER_BS
+import com.vladus177.albums.data.Constants.USER_CATCH_PHRASE
+import com.vladus177.albums.data.Constants.USER_CITY
+import com.vladus177.albums.data.Constants.USER_COMPANY_NAME
+import com.vladus177.albums.data.Constants.USER_EMAIL
+import com.vladus177.albums.data.Constants.USER_ID
+import com.vladus177.albums.data.Constants.USER_IS_FAVORITE
+import com.vladus177.albums.data.Constants.USER_LAT
+import com.vladus177.albums.data.Constants.USER_LNG
+import com.vladus177.albums.data.Constants.USER_NAME
+import com.vladus177.albums.data.Constants.USER_PHONE
+import com.vladus177.albums.data.Constants.USER_STREET
+import com.vladus177.albums.data.Constants.USER_SUITE
+import com.vladus177.albums.data.Constants.USER_WEBSITE
+import com.vladus177.albums.data.Constants.USER_ZIPCODE
 
 @Entity(tableName = "users")
 data class UserEntity @JvmOverloads constructor(

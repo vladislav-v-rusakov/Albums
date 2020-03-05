@@ -1,2 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="list_item_padding">8dp</dimen>
+    <dimen name="icon_info_size">128dp</dimen>
+
+    <dimen name="space_none">0dp</dimen>
+    <dimen name="extra_xsmall">1dp</dimen>
+    <dimen name="space_extra_xsmall">2dp</dimen>
+    <dimen name="space_extra_xxsmall">4dp</dimen>
+    <dimen name="space_extra_xxxsmall">6dp</dimen>
+
+    <dimen name="space_small">8dp</dimen>
+    <dimen name="space_xsmall">10dp</dimen>
+    <dimen name="space_xxsmall">12dp</dimen>
+    <dimen name="space_xxxsmall">14dp</dimen>
+
+    <dimen name="space_normal">16dp</dimen>
+    <dimen name="space_xnormal">18dp</dimen>
+    <dimen name="space_xxnormal">20dp</dimen>
+    <dimen name="space_xxxnormal">22dp</dimen>
+
+    <dimen name="space_large">24dp</dimen>
+    <dimen name="space_mlarge">26dp</dimen>
+    <dimen name="space_xlarge">32dp</dimen>
+    <dimen name="space_xxlarge">64dp</dimen>
+    <dimen name="space_xxxlarge">98dp</dimen>
+
+</resources>

@@ -1,10 +1,10 @@
-package vladus177.com.albums.data.local
+package com.vladus177.albums.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import vladus177.com.albums.data.local.model.UserEntity
+import com.vladus177.albums.data.local.model.UserEntity
 
 @Dao
 interface UsersDao {

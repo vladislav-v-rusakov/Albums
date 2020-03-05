@@ -1,10 +1,11 @@
-package vladus177.com.albums.data.local
+package com.vladus177.albums.data.local
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import vladus177.com.albums.data.AlbumsDataSource
-import vladus177.com.albums.data.Result
-import vladus177.com.albums.domain.model.UserModel
+import com.vladus177.albums.data.AlbumsDataSource
+import com.vladus177.albums.data.Result
+import com.vladus177.albums.data.remote.model.UserEntry
+import com.vladus177.albums.domain.model.UserModel
 
 class AlbumsLocalDataSource internal constructor(
     private val usersDao: UsersDao,
@@ -27,7 +28,7 @@ class AlbumsLocalDataSource internal constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun getAllUsers(): Result<List<UserModel>> {
+    override suspend fun getAllUsers(): List<UserEntry> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

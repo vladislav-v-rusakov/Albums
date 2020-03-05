@@ -1,5 +1,6 @@
-package vladus177.com.albums.di
+package com.vladus177.albums.di
 
+import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import dagger.Binds
@@ -7,16 +8,21 @@ import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import vladus177.com.albums.data.AlbumRepositoryImpl
-import vladus177.com.albums.data.AlbumsDataSource
-import vladus177.com.albums.data.AlbumsRepository
-import vladus177.com.albums.data.local.AlbumsLocalDataSource
-import vladus177.com.albums.data.local.UsersDatabase
-import vladus177.com.albums.data.remote.AlbumsRemoteDataSource
-import vladus177.com.albums.data.remote.AlbumsRestApi
-import vladus177.com.albums.data.remote.AlbumsRestApiFactory
+import com.vladus177.albums.data.AlbumRepositoryImpl
+import com.vladus177.albums.data.AlbumsDataSource
+import com.vladus177.albums.data.AlbumsRepository
+import com.vladus177.albums.data.local.AlbumsLocalDataSource
+import com.vladus177.albums.data.local.UsersDatabase
+import com.vladus177.albums.data.remote.AlbumsRemoteDataSource
+import com.vladus177.albums.data.remote.AlbumsRestApi
+import com.vladus177.albums.data.remote.AlbumsRestApiFactory
 import javax.inject.Qualifier
 import javax.inject.Singleton
+import androidx.core.content.ContextCompat.getSystemService
+import android.net.ConnectivityManager
+import androidx.core.content.ContextCompat.getSystemService
+import com.vladus177.albums.common.util.NetworkStateManager
+
 
 @Module(includes = [ApplicationModuleBinds::class])
 object ApplicationModule {
@@ -37,7 +43,7 @@ object ApplicationModule {
         restApi: AlbumsRestApi,
         ioDispatcher: CoroutineDispatcher
     ): AlbumsDataSource {
-        return AlbumsRemoteDataSource(restApi, ioDispatcher)
+        return AlbumsRemoteDataSource(restApi)
     }
 
     @JvmStatic
@@ -69,6 +75,13 @@ object ApplicationModule {
             UsersDatabase::class.java,
             "Users.db"
         ).build()
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideNetworkStateManager(context: Context): NetworkStateManager {
+        return NetworkStateManager(context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
     }
 
     @JvmStatic

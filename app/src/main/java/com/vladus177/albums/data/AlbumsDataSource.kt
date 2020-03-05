@@ -1,9 +1,10 @@
-package vladus177.com.albums.data
+package com.vladus177.albums.data
 
-import vladus177.com.albums.domain.model.UserModel
+import com.vladus177.albums.data.remote.model.UserEntry
+import com.vladus177.albums.domain.model.UserModel
 
 interface AlbumsDataSource {
-    suspend fun getAllUsers(): Result<List<UserModel>>
+    suspend fun getAllUsers(): List<UserEntry>
 
     suspend fun saveAllUsers(): Result<List<UserModel>>
 

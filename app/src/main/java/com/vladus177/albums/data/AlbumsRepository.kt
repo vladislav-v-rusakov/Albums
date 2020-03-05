@@ -1,10 +1,11 @@
-package vladus177.com.albums.data
+package com.vladus177.albums.data
 
-import vladus177.com.albums.domain.model.UserModel
+import com.vladus177.albums.domain.model.UserModel
+import com.vladus177.albums.common.Result
 
 interface AlbumsRepository {
 
-    suspend fun getAllUsers(forceUpdate: Boolean): Result<List<UserModel>>
+    suspend fun getAllUsers(forceUpdate: Boolean): List<UserModel>
 
     suspend fun saveAllUsers(): Result<List<UserModel>>
 

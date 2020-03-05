@@ -1,7 +1,7 @@
 package com.vladus177.albums.di
 
 import androidx.lifecycle.ViewModel
-import com.vladus177.albums.presentation.UsersListViewModel
+import com.vladus177.albums.presentation.UserListViewModel
 import com.vladus177.albums.ui.fragment.UserListFragment
 import dagger.Binds
 import dagger.Module
@@ -9,7 +9,7 @@ import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 
 @Module
-class UsersModul {
+abstract class UsersModule {
     @ContributesAndroidInjector(modules = [
         ViewModelBuilder::class
     ])
@@ -17,6 +17,6 @@ class UsersModul {
 
     @Binds
     @IntoMap
-    @ViewModelKey(UsersListViewModel::class)
-    abstract fun bindViewModel(viewmodel: UsersListViewModel): ViewModel
+    @ViewModelKey(UserListViewModel::class)
+    abstract fun bindViewModel(viewmodel: UserListViewModel): ViewModel
 }

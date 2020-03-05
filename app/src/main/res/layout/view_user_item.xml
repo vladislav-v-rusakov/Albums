@@ -1,6 +1,131 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</LinearLayout>
+    <data>
+
+        <import type="android.widget.CompoundButton" />
+
+        <variable
+            name="user"
+            type="com.vladus177.albums.ui.model.UserView" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/list_item_padding"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/list_item_padding">
+
+        <RelativeLayout
+            android:id="@+id/rl_user_personal_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/iv_favorite"
+                android:paddingTop="@dimen/space_extra_xxsmall"
+                android:paddingBottom="@dimen/space_extra_xxsmall"
+                android:text="@{user.name}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="Leanne Graham" />
+
+            <TextView
+                android:id="@+id/tv_user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_user_name"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/iv_favorite"
+                android:drawableStart="@drawable/ic_email_18dp"
+                android:drawablePadding="@dimen/space_extra_xxsmall"
+                android:paddingTop="@dimen/space_extra_xxsmall"
+                android:paddingBottom="@dimen/space_extra_xxsmall"
+                android:text="@{user.email}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                tools:text="Sincere@april.biz" />
+
+            <TextView
+                android:id="@+id/tv_user_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_user_email"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/iv_favorite"
+                android:drawableStart="@drawable/ic_local_phone_18dp"
+                android:drawablePadding="@dimen/space_extra_xxsmall"
+                android:paddingTop="@dimen/space_extra_xxsmall"
+                android:paddingBottom="@dimen/space_extra_xxsmall"
+                android:text="@{user.phone}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                tools:text="1-770-736-8031 x56442" />
+
+            <ImageView
+                android:id="@+id/iv_favorite"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/list_item_padding"
+                android:src="@drawable/ic_favorite_border_red_24dp"
+                tools:ignore="ContentDescription" />
+
+        </RelativeLayout>
+
+        <View style="@style/Divider" />
+
+        <TextView
+            android:id="@+id/tv_user_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_home_24dp"
+            android:drawablePadding="@dimen/space_extra_xxsmall"
+            android:paddingTop="@dimen/space_extra_xxsmall"
+            android:paddingBottom="@dimen/space_extra_xxsmall"
+            android:text="@{user.address.fullAddress}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            tools:text="90566-7771, Wisokyburgh, Victor Plains, Suite 879" />
+
+        <View style="@style/Divider" />
+
+        <TextView
+            android:id="@+id/tv_company_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/space_extra_xxsmall"
+            android:paddingBottom="@dimen/space_extra_xxsmall"
+            android:text="@{`Company name: ` + user.company.name}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            tools:text="Company name: Romaguera-Crona" />
+
+        <TextView
+            android:id="@+id/tv_company_catch_phrase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/space_extra_xxsmall"
+            android:paddingBottom="@dimen/space_extra_xxsmall"
+            android:text="@{`Catch Phrase: ` + user.company.catchPhrase}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            tools:text="Catch Phrase: Multi-layered client-server neural-net" />
+
+        <TextView
+            android:id="@+id/tv_company_bs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/space_extra_xxsmall"
+            android:paddingBottom="@dimen/space_extra_xxsmall"
+            android:text="@{`Slogan: ` + user.company.bs}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            tools:text="Slogan: harness real-time e-markets" />
+
+    </LinearLayout>
+
+</layout>

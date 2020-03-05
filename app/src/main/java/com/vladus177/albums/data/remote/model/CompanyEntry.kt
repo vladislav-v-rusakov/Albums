@@ -1,9 +1,9 @@
-package vladus177.com.albums.data.remote.model
+package com.vladus177.albums.data.remote.model
 
 import com.google.gson.annotations.SerializedName
-import vladus177.com.albums.data.Constants.USER_BS
-import vladus177.com.albums.data.Constants.USER_CATCH_PHRASE
-import vladus177.com.albums.data.Constants.USER_NAME
+import com.vladus177.albums.data.Constants.USER_BS
+import com.vladus177.albums.data.Constants.USER_CATCH_PHRASE
+import com.vladus177.albums.data.Constants.USER_NAME
 
 data class CompanyEntry(
     @SerializedName(USER_NAME) val name: String?,

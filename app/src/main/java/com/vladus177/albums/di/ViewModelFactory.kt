@@ -38,7 +38,7 @@ class AlbumViewModelFactory @Inject constructor(
 internal abstract class ViewModelBuilder {
     @Binds
     internal abstract fun bindViewModelFactory(
-        factory: TodoViewModelFactory
+        factory: AlbumViewModelFactory
     ): ViewModelProvider.Factory
 }
 

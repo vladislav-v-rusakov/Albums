@@ -1,4 +1,4 @@
-package vladus177.com.albums.domain.model
+package com.vladus177.albums.domain.model
 
 data class AddressModel(
     val street: String?,

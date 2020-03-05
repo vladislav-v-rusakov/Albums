@@ -1,5 +1,6 @@
-package vladus177.com.albums.data.remote
+package com.vladus177.albums.data.remote
 
+import com.vladus177.albums.data.Constants.BASE_URL
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
 
@@ -7,7 +8,7 @@ import retrofit2.Retrofit
 class AlbumsRestApiFactory {
 
     fun retrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl("https://api.themoviedb.org/3/")
+        .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

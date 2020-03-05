@@ -1,18 +1,18 @@
-package vladus177.com.albums.data.remote
+package com.vladus177.albums.data.remote
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import vladus177.com.albums.data.AlbumsDataSource
-import vladus177.com.albums.data.Result
-import vladus177.com.albums.domain.model.UserModel
+import com.vladus177.albums.data.AlbumsDataSource
+import com.vladus177.albums.data.Result
+import com.vladus177.albums.data.remote.model.UserEntry
+import com.vladus177.albums.domain.model.UserModel
 
 class AlbumsRemoteDataSource internal constructor(
-    private val apiService: AlbumsRestApi,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val apiService: AlbumsRestApi
 ) : AlbumsDataSource {
 
-    override suspend fun getAllUsers(): Result<List<UserModel>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun getAllUsers(): List<UserEntry> {
+       return apiService.getAllUsers()
     }
 
     override suspend fun saveAllUsers(): Result<List<UserModel>> {

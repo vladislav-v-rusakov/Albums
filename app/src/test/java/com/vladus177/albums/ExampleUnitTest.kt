@@ -1,4 +1,4 @@
-package vladus177.com.albums
+package com.vladus177.albums
 
 import org.junit.Test
 

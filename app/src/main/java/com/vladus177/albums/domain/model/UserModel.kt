@@ -1,4 +1,7 @@
-package vladus177.com.albums.domain.model
+package com.vladus177.albums.domain.model
+
+import com.vladus177.albums.domain.model.AddressModel
+import com.vladus177.albums.domain.model.CompanyModel
 
 data class UserModel(
     val id: Long?,
@@ -8,5 +11,6 @@ data class UserModel(
     val address: AddressModel?,
     val phone: String?,
     val website: String?,
-    val company: CompanyModel?
+    val company: CompanyModel?,
+    val isFavorite: Boolean
 )

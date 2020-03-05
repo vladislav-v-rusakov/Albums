@@ -1,4 +1,4 @@
-package vladus177.com.albums.data
+package com.vladus177.albums.data
 
 sealed class Result<out R> {
 

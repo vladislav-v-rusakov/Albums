@@ -1,8 +1,9 @@
-package vladus177.com.albums
+package com.vladus177.albums
 
+import com.vladus177.albums.di.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import vladus177.com.albums.di.DaggerApplicationComponent
+
 
 open class AlbumApplication : DaggerApplication() {
 

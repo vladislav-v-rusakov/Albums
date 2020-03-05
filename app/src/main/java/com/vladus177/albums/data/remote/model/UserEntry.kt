@@ -1,14 +1,14 @@
-package vladus177.com.albums.data.remote.model
+package com.vladus177.albums.data.remote.model
 
 import com.google.gson.annotations.SerializedName
-import vladus177.com.albums.data.Constants.USER_ADDRESS
-import vladus177.com.albums.data.Constants.USER_ALIAS
-import vladus177.com.albums.data.Constants.USER_COMPANY
-import vladus177.com.albums.data.Constants.USER_EMAIL
-import vladus177.com.albums.data.Constants.USER_ID
-import vladus177.com.albums.data.Constants.USER_NAME
-import vladus177.com.albums.data.Constants.USER_PHONE
-import vladus177.com.albums.data.Constants.USER_WEBSITE
+import com.vladus177.albums.data.Constants.USER_ADDRESS
+import com.vladus177.albums.data.Constants.USER_ALIAS
+import com.vladus177.albums.data.Constants.USER_COMPANY
+import com.vladus177.albums.data.Constants.USER_EMAIL
+import com.vladus177.albums.data.Constants.USER_ID
+import com.vladus177.albums.data.Constants.USER_NAME
+import com.vladus177.albums.data.Constants.USER_PHONE
+import com.vladus177.albums.data.Constants.USER_WEBSITE
 
 
 data class UserEntry(
