@@ -15,7 +15,9 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         UsersModule::class,
         AlbumsModule::class,
-        ImagesModule::class
+        ImagesModule::class,
+        PicassoModule::class,
+    OkHttpClientModule::class
     ]
 )
 interface ApplicationComponent : AndroidInjector<AlbumApplication> {

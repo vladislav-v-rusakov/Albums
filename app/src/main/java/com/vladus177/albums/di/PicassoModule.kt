@@ -11,12 +11,12 @@ import dagger.Module
 class PicassoModule {
 
     @Provides
-    fun picasso(context: Context, okHttp3Downloader: OkHttp3Downloader): Picasso {
+    fun providePicasso(context: Context, okHttp3Downloader: OkHttp3Downloader): Picasso {
         return Picasso.Builder(context).downloader(okHttp3Downloader).build()
     }
 
     @Provides
-    fun okHttp3Downloader(okHttpClient: OkHttpClient): OkHttp3Downloader {
+    fun provideOkHttp3Downloader(okHttpClient: OkHttpClient): OkHttp3Downloader {
         return OkHttp3Downloader(okHttpClient)
     }
 

@@ -5,5 +5,6 @@ data class ImageModel(
     val id: Long?,
     val title: String?,
     val url: String?,
-    val thumbnail: String?
+    val thumbnail: String?,
+    val uriPath: String?
 )

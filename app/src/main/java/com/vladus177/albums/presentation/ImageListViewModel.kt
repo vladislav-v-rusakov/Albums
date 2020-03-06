@@ -7,7 +7,7 @@ import com.vladus177.albums.domain.model.ImageModel
 import com.vladus177.albums.domain.model.ImagesByAlbumIdParam
 import javax.inject.Inject
 
-class ImageListViewModule @Inject constructor(
+class ImageListViewModel @Inject constructor(
     private val getImageListUseCase: GetImageListUseCase
 ) : ViewModel() {
 

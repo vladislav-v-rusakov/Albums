@@ -12,36 +12,44 @@ import com.vladus177.albums.domain.model.UserModel
 import javax.inject.Inject
 
 class AlbumRepositoryImpl @Inject constructor(
-    @AlbumsRemoteDataSource private val tasksRemoteDataSource: AlbumsDataSource,
-    @AlbumsLocalDataSource private val tasksLocalDataSource: AlbumsDataSource,
+    @AlbumsRemoteDataSource private val remoteDataSource: AlbumsDataSource,
+    @AlbumsLocalDataSource private val localDataSource: AlbumsDataSource,
     private val userMapper: UserDataMapper,
     private val albumMapper: AlbumDataMapper,
     private val imageMapper: ImageDataMapper
 ) : AlbumsRepository {
 
-    override suspend fun getImagesByAlbumId(forceUpdate: Boolean, userId: Long): List<ImageModel> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override suspend fun getImagesByAlbumId(forceUpdate: Boolean, albumId: Long): List<ImageModel> =
+        remoteDataSource.getImagesByAlbumId(albumId)
+            .map {
+                with(imageMapper) {
+                    it.fromDataToDomain()
+                }
+            }
 
-    override suspend fun getAllImages(forceUpdate: Boolean): List<ImageModel> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override suspend fun getAlbumsByUserId(forceUpdate: Boolean, userId: Long): List<AlbumModel> = tasksRemoteDataSource
-    .getAlbumsByUserId(userId)
-    .map {
-        with(albumMapper) {
-            it.fromDataToDomain()
+    override suspend fun getAllImages(forceUpdate: Boolean): List<ImageModel> =
+        remoteDataSource.getAllImages().map {
+            with(imageMapper) {
+                it.fromDataToDomain()
+            }
         }
-    }
 
-    override suspend fun getAllAlbums(forceUpdate: Boolean): List<AlbumModel> = tasksRemoteDataSource
-    .getAllAlbums()
-    .map {
-        with(albumMapper) {
-            it.fromDataToDomain()
+    override suspend fun getAlbumsByUserId(forceUpdate: Boolean, userId: Long): List<AlbumModel> =
+        remoteDataSource
+            .getAlbumsByUserId(userId)
+            .map {
+                with(albumMapper) {
+                    it.fromDataToDomain()
+                }
+            }
+
+    override suspend fun getAllAlbums(forceUpdate: Boolean): List<AlbumModel> = remoteDataSource
+        .getAllAlbums()
+        .map {
+            with(albumMapper) {
+                it.fromDataToDomain()
+            }
         }
-    }
 
     override suspend fun saveAllUsers(): Result<List<UserModel>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -51,7 +59,7 @@ class AlbumRepositoryImpl @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun getAllUsers(forceUpdate: Boolean): List<UserModel> = tasksRemoteDataSource
+    override suspend fun getAllUsers(forceUpdate: Boolean): List<UserModel> = remoteDataSource
         .getAllUsers()
         .map {
             with(userMapper) {

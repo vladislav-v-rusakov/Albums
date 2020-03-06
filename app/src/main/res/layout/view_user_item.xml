@@ -4,8 +4,6 @@
 
     <data>
 
-        <import type="android.widget.CompoundButton" />
-
         <variable
             name="user"
             type="com.vladus177.albums.ui.model.UserView" />
@@ -76,7 +74,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="@dimen/list_item_padding"
-                android:src="@drawable/ic_favorite_border_red_24dp"
+                android:src="@{user.isFavorite ? @drawable/ic_favorite_red_24dp : @drawable/ic_favorite_border_red_24dp}"
                 tools:ignore="ContentDescription" />
 
         </RelativeLayout>

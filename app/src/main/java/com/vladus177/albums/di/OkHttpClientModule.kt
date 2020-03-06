@@ -14,7 +14,7 @@ import java.io.File
 class OkHttpClientModule {
 
     @Provides
-    fun okHttpClient(cache: Cache, httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideOkHttpClient(cache: Cache, httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient()
             .newBuilder()
             .cache(cache)
@@ -23,19 +23,19 @@ class OkHttpClientModule {
     }
 
     @Provides
-    fun cache(cacheFile: File): Cache {
+    fun provideCache(cacheFile: File): Cache {
         return Cache(cacheFile, 10 * 1000 * 1000) //10 MB
     }
 
     @Provides
-    fun file(context: Context): File {
+    fun provideFile(context: Context): File {
         val file = File(context.cacheDir, "HttpCache")
         file.mkdirs()
         return file
     }
 
     @Provides
-    fun httpLoggingInterceptor(): HttpLoggingInterceptor {
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 Log.i("HttpLoggingInterceptor", message)

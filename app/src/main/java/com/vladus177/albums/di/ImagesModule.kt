@@ -1,7 +1,7 @@
 package com.vladus177.albums.di
 
 import androidx.lifecycle.ViewModel
-import com.vladus177.albums.presentation.ImageListViewModule
+import com.vladus177.albums.presentation.ImageListViewModel
 import com.vladus177.albums.ui.fragment.ImageListFragment
 import dagger.Binds
 import dagger.Module
@@ -17,6 +17,6 @@ abstract class ImagesModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ImageListViewModule::class)
-    abstract fun bindViewModel(viewmodel: ImageListViewModule): ViewModel
+    @ViewModelKey(ImageListViewModel::class)
+    abstract fun bindViewModel(viewmodel: ImageListViewModel): ViewModel
 }

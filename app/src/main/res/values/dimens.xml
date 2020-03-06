@@ -5,6 +5,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="list_item_padding">8dp</dimen>
     <dimen name="icon_info_size">128dp</dimen>
+    <dimen name="image_size">350dp</dimen>
 
     <dimen name="space_none">0dp</dimen>
     <dimen name="extra_xsmall">1dp</dimen>

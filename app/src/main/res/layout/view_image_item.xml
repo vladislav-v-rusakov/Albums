@@ -14,14 +14,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ll_album_item"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="@dimen/activity_horizontal_margin">
 
         <ImageView
             android:id="@+id/iv_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
+            android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=gone}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,15 +30,15 @@
             tools:ignore="ContentDescription" />
 
         <ProgressBar
+            android:id="@+id/pb_image_loading"
+            style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="@{isLoading ? View.VISIBLE : View.INVISIBLE, default=visible}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="?android:attr/progressBarStyleLarge"
-            android:visibility="@{isLoading ? View.VISIBLE : View.INVISIBLE}"/>
-
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

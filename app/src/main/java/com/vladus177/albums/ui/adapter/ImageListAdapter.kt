@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vladus177.albums.ui.model.ImageView
 import com.squareup.picasso.Picasso
 import com.vladus177.albums.databinding.ViewImageItemBinding
+import java.lang.Exception
 import javax.inject.Inject
-
-
 
 
 
@@ -31,8 +30,16 @@ class ImageListAdapter @Inject constructor(private val picasso: Picasso) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ImageView, picasso: Picasso?) {
-            binding.isLoading = false
-            picasso?.load(item.url)?.into(binding.ivPhoto)
+
+            picasso?.load(item.url)?.into(binding.ivPhoto, object: com.squareup.picasso.Callback {
+                override fun onError(e: Exception?) {
+
+                }
+
+                override fun onSuccess() {
+                    binding.isLoading = false
+                }
+            })
             binding.executePendingBindings()
         }
 

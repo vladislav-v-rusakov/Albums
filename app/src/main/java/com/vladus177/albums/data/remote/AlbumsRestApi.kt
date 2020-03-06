@@ -21,6 +21,6 @@ interface AlbumsRestApi {
     suspend fun getAllImages(): List<ImageEntry>
 
     @GET("/photos")
-    suspend fun getImagesByAlbumId(@Query("albumId") userId: Long): List<ImageEntry>
+    suspend fun getImagesByAlbumId(@Query("albumId") albumId: Long): List<ImageEntry>
 
 }

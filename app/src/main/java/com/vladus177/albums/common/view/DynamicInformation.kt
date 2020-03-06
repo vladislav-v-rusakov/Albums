@@ -33,7 +33,7 @@ class DynamicInformation @JvmOverloads constructor(
     fun hideLoading() {
         this.visibility = View.GONE
         binding?.apply {
-            isLoading = true
+            isLoading = false
             executePendingBindings()
         }
     }
@@ -41,8 +41,9 @@ class DynamicInformation @JvmOverloads constructor(
     fun showError() {
         this.visibility = View.VISIBLE
         binding?.apply {
-
-
+            isLoading = false
+            tvTitle.text = resources.getString(R.string.error_title)
+            tvMessage.text = resources.getString(R.string.error_message)
             executePendingBindings()
         }
     }
@@ -50,6 +51,7 @@ class DynamicInformation @JvmOverloads constructor(
     fun showConnectionError() {
         this.visibility = View.VISIBLE
         binding?.apply {
+            isLoading = false
             tvTitle.text = resources.getString(R.string.connection_error_title)
             tvMessage.text = resources.getString(R.string.connection_error_message)
             executePendingBindings()
@@ -59,8 +61,9 @@ class DynamicInformation @JvmOverloads constructor(
     fun showEmptyList() {
         this.visibility = View.VISIBLE
         binding?.apply {
-
-
+            isLoading = false
+            tvTitle.text = resources.getString(R.string.empty_list_title)
+            tvMessage.text = resources.getString(R.string.empty_user_list__message)
             executePendingBindings()
         }
     }

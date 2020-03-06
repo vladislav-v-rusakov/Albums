@@ -2,19 +2,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:id="@+id/ll_album_list"
+        android:id="@+id/ll_image_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <com.vladus177.albums.common.view.DynamicInformation
-            android:id="@+id/di_album_info"
+            android:id="@+id/di_image_info"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/album_list"
+            android:id="@+id/image_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

@@ -11,6 +11,7 @@ class ImageDataMapper @Inject constructor() {
         id = id,
         title = title,
         url = url,
-        thumbnail = thumbnail
+        thumbnail = thumbnail,
+        uriPath = ""
     )
 }
