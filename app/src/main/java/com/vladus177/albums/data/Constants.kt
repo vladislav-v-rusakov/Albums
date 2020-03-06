@@ -29,4 +29,13 @@ object Constants {
     const val ALBUM_USER_ID = "userId"
     const val ALBUM_ID = "id"
     const val ALBUM_TITLE = "title"
+
+    //Images
+    const val IMAGE_ALBUM_ID = "albumId"
+    const val IMAGE_ID = "id"
+    const val IMAGE_TITLE = "title"
+    const val IMAGE_URL = "url"
+    const val IMAGE_THUMBNAIL = "thumbnailUrl"
+    const val IMAGE_URI = "uri"
+
 }

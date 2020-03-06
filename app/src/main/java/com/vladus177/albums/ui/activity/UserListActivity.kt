@@ -23,7 +23,7 @@ class UserListActivity : AppCompatActivity() {
 
         val navController: NavController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration =
-            AppBarConfiguration.Builder(R.id.usersFragment, R.id.albumsFragment)
+            AppBarConfiguration.Builder(R.id.usersFragment)
                 .build()
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
