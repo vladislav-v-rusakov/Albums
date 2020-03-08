@@ -36,7 +36,6 @@ class AlbumListAdapter(private val itemClickListener: OnAlbumItemClickListener) 
             }
         }
     }
-
 }
 
 interface OnAlbumItemClickListener {

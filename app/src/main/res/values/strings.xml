@@ -7,7 +7,7 @@
     <string name="empty_list_title">No data</string>
     <string name="empty_user_list__message">There is no data to show. Please try again later.</string>
     <string name="error_title">Could not connect to services</string>
-    <string name="error_message">Please try again later.</string>
+    <string name="error_message">Please try again later. Or click "RELOAD" to use local data</string>
 
     <string name="reload">Reload</string>
 

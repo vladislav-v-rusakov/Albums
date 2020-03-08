@@ -7,8 +7,8 @@ import dagger.android.DaggerApplication
 
 open class AlbumApplication : DaggerApplication() {
 
-     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
 
-         return DaggerApplicationComponent.factory().create(applicationContext)
-     }
+        return DaggerApplicationComponent.factory().create(applicationContext)
+    }
 }

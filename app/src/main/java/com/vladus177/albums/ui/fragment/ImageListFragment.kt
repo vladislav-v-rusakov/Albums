@@ -5,24 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.vladus177.albums.common.Result
-import com.vladus177.albums.common.extension.observe
+import com.vladus177.albums.common.Resource
+import com.vladus177.albums.common.ResourceState
 import com.vladus177.albums.common.util.NetworkStateManager
 import com.vladus177.albums.common.view.DynamicInformation
-import com.vladus177.albums.databinding.FragmentAlbumListBinding
 import com.vladus177.albums.databinding.FragmentImageListBinding
-import com.vladus177.albums.domain.model.AlbumModel
-import com.vladus177.albums.domain.model.ImageModel
-import com.vladus177.albums.presentation.AlbumListViewModel
 import com.vladus177.albums.presentation.ImageListViewModel
-import com.vladus177.albums.ui.adapter.AlbumListAdapter
 import com.vladus177.albums.ui.adapter.ImageListAdapter
-import com.vladus177.albums.ui.mapper.AlbumViewMapper
 import com.vladus177.albums.ui.mapper.ImageViewMapper
+import com.vladus177.albums.ui.model.ImageView
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -42,14 +37,6 @@ class ImageListFragment : DaggerFragment() {
     private lateinit var viewDataBinding: FragmentImageListBinding
     private val args: ImageListFragmentArgs by navArgs()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
-        setupListAdapter()
-        setupObserver()
-        loadImageList(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,47 +44,37 @@ class ImageListFragment : DaggerFragment() {
     ): View? {
         viewDataBinding = FragmentImageListBinding.inflate(inflater, container, false)
         dynamicInfo = viewDataBinding.diImageInfo
-        dynamicInfo.setActionButtonClickListener(clickListener = { loadImageList(true) })
+        dynamicInfo.setActionButtonClickListener(clickListener = { loadImageList(false) })
         return viewDataBinding.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+        setupListAdapter()
+        viewModel.images.observe(viewLifecycleOwner, Observer { updateImages(it) })
+        loadImageList(true)
+    }
+
     private fun loadImageList(forceUpdate: Boolean) {
-        viewModel.getImagesListByAlbumId(args.albumId, forceUpdate)
+        viewModel.loadImageList(args.albumId, forceUpdate)
     }
 
-    private fun setupObserver() {
-        with(viewModel) {
-            observe(imageLiveData, ::imageDataObserver)
-        }
-    }
-
-    private fun imageDataObserver(result: Result<List<ImageModel>>?) {
-        when (result) {
-            is Result.OnLoading -> {
-                dynamicInfo.showLoading()
-            }
-            is Result.OnSuccess -> {
-                dynamicInfo.hideLoading()
-                val imageList = with(mapper) {
-                    result.value.map {
-                        it.fromDomainToView()
+    private fun updateImages(resource: Resource<List<ImageView>>?) {
+        resource?.let {
+            when (it.state) {
+                ResourceState.LOADING -> dynamicInfo.showLoading()
+                ResourceState.SUCCESS -> {
+                    dynamicInfo.hideLoading()
+                    it.data?.let {
+                        if (it.isEmpty() && !networkStateManager.isConnectedOrConnecting) {
+                            dynamicInfo.showConnectionError()
+                        }
                     }
                 }
-                listAdapter.submitList(imageList)
+                ResourceState.ERROR -> dynamicInfo.showError()
             }
-            is Result.OnEmpty -> {
-                if (networkStateManager.isConnectedOrConnecting) {
-                    dynamicInfo.showEmptyList()
-                } else {
-                    dynamicInfo.showConnectionError()
-                }
-            }
-            is Result.OnError -> {
-                dynamicInfo.showError()
-            }
-            else -> {
-                dynamicInfo.hideLoading()
-            }
+            it.data?.let { listAdapter.submitList(it) }
         }
     }
 

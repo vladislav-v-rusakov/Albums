@@ -1,16 +1,17 @@
 package com.vladus177.albums.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vladus177.albums.ui.model.ImageView
 import com.squareup.picasso.Picasso
+import com.vladus177.albums.R
 import com.vladus177.albums.databinding.ViewImageItemBinding
 import java.lang.Exception
 import javax.inject.Inject
-
 
 
 class ImageListAdapter @Inject constructor(private val picasso: Picasso) :
@@ -31,13 +32,14 @@ class ImageListAdapter @Inject constructor(private val picasso: Picasso) :
 
         fun bind(item: ImageView, picasso: Picasso?) {
 
-            picasso?.load(item.url)?.into(binding.ivPhoto, object: com.squareup.picasso.Callback {
+            picasso?.load(item.url)?.into(binding.ivPhoto, object : com.squareup.picasso.Callback {
                 override fun onError(e: Exception?) {
-
+                    binding.ivPhoto.setImageDrawable(binding.ivPhoto.context.getDrawable(R.drawable.ic_close_24dp))
                 }
 
                 override fun onSuccess() {
-                    binding.isLoading = false
+                    binding.ivPhoto.visibility = View.VISIBLE
+                    binding.pbImageLoading.visibility = View.GONE
                 }
             })
             binding.executePendingBindings()

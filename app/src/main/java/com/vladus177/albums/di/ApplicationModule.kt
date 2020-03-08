@@ -5,61 +5,32 @@ import androidx.room.Room
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.Dispatchers
-import com.vladus177.albums.data.AlbumRepositoryImpl
-import com.vladus177.albums.data.AlbumsDataSource
-import com.vladus177.albums.data.AlbumsRepository
-import com.vladus177.albums.data.local.UserDatabase
-import com.vladus177.albums.data.remote.AlbumsRemoteDataSource
-import com.vladus177.albums.data.remote.AlbumsRestApi
+
 import com.vladus177.albums.data.remote.AlbumsRestApiFactory
-import javax.inject.Qualifier
 import javax.inject.Singleton
 import android.net.ConnectivityManager
 import com.squareup.picasso.Picasso
+import com.vladus177.albums.common.PostExecutionThread
+import com.vladus177.albums.common.UiThread
 import com.vladus177.albums.common.util.NetworkStateManager
-import com.vladus177.albums.data.local.AlbumDatabase
-import com.vladus177.albums.data.local.AlbumsLocalDataSource
+import com.vladus177.albums.data.AlbumDataRepository
+import com.vladus177.albums.data.ImageDataRepository
+import com.vladus177.albums.data.UserDataRepository
+import com.vladus177.albums.data.local.*
+import com.vladus177.albums.data.remote.AlbumRemoteRepositoryImpl
+import com.vladus177.albums.data.remote.ImageRemoteRepositoryImpl
+import com.vladus177.albums.data.remote.UserRemoteRepositoryImpl
+import com.vladus177.albums.data.repository.*
+import com.vladus177.albums.domain.AlbumRepository
+import com.vladus177.albums.domain.ImageRepository
+import com.vladus177.albums.domain.UserRepository
 import com.vladus177.albums.ui.adapter.ImageListAdapter
 
 
 @Module(includes = [ApplicationModuleBinds::class])
 object ApplicationModule {
 
-    @Qualifier
-    @Retention(AnnotationRetention.RUNTIME)
-    annotation class AlbumsRemoteDataSource
-
-    @Qualifier
-    @Retention(AnnotationRetention.RUNTIME)
-    annotation class AlbumsLocalDataSource
-
     @JvmStatic
-    @Singleton
-    @AlbumsRemoteDataSource
-    @Provides
-    fun provideAlbumsRemoteDataSource(
-        restApi: AlbumsRestApi
-    ): AlbumsDataSource {
-        return AlbumsRemoteDataSource(restApi)
-    }
-
-    @JvmStatic
-    @Singleton
-    @AlbumsLocalDataSource
-    @Provides
-    fun provideAlbumsLocalDataSource(
-        userDatabase: UserDatabase,
-        albumDatabase: AlbumDatabase
-    ): AlbumsDataSource {
-        return AlbumsLocalDataSource(
-            userDatabase.usersDao(),
-            albumDatabase.albumsDao()
-        )
-    }
-
-    @JvmStatic
-    @Singleton
     @Provides
     fun provideUserDataBase(context: Context): UserDatabase {
         return Room.databaseBuilder(
@@ -68,6 +39,10 @@ object ApplicationModule {
             "Users.db"
         ).build()
     }
+
+    @JvmStatic
+    @Provides
+    fun provideUserDao(db: UserDatabase) = db.usersDao()
 
     @JvmStatic
     @Singleton
@@ -81,8 +56,29 @@ object ApplicationModule {
     }
 
     @JvmStatic
-    @Provides
     @Singleton
+    @Provides
+    fun provideAlbumDao(db: AlbumDatabase) = db.albumsDao()
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideImageDataBase(context: Context): ImageDatabase {
+        return Room.databaseBuilder(
+            context.applicationContext,
+            ImageDatabase::class.java,
+            "Image.db"
+        ).build()
+    }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideImageDao(db: ImageDatabase) = db.imageDao()
+
+
+    @JvmStatic
+    @Provides
     fun provideNetworkStateManager(context: Context): NetworkStateManager {
         return NetworkStateManager(context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
     }
@@ -94,12 +90,6 @@ object ApplicationModule {
     }
 
     @JvmStatic
-    @Singleton
-    @Provides
-    fun provideIoDispatcher() = Dispatchers.IO
-
-    @JvmStatic
-    @Singleton
     @Provides
     fun provideAlbumsRestApi() = AlbumsRestApiFactory().albumsApi
 }
@@ -107,7 +97,38 @@ object ApplicationModule {
 @Module
 abstract class ApplicationModuleBinds {
 
-    @Singleton
+
     @Binds
-    abstract fun bindRepository(repo: AlbumRepositoryImpl): AlbumsRepository
+    abstract fun bindUserDataRepository(dataRepository: UserDataRepository): UserRepository
+
+    @Binds
+    abstract fun bindUserLocal(userLocal: UserLocalRepositoryImpl): UserLocal
+
+    @Binds
+    abstract fun bindUserRemote(userRemote: UserRemoteRepositoryImpl): UserRemote
+
+
+    @Binds
+    abstract fun bindAlbumDataRepository(dataRepository: AlbumDataRepository): AlbumRepository
+
+    @Binds
+    abstract fun bindAlbumLocal(albumLocal: AlbumLocalRepositoryImpl): AlbumLocal
+
+    @Binds
+    abstract fun bindAlbumRemote(albumRemote: AlbumRemoteRepositoryImpl): AlbumRemote
+
+
+    @Binds
+    abstract fun bindImageDataRepository(dataRepository: ImageDataRepository): ImageRepository
+
+    @Binds
+    abstract fun bindImageLocal(imageLocal: ImageLocalRepositoryImpl): ImageLocal
+
+    @Binds
+    abstract fun bindImageRemote(imageRemote: ImageRemoteRepositoryImpl): ImageRemote
+
+
+    @Binds
+    abstract fun bindPostExecutionThread(uiThread: UiThread): PostExecutionThread
+
 }

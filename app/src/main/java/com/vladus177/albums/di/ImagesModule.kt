@@ -10,9 +10,11 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class ImagesModule {
-    @ContributesAndroidInjector(modules = [
-        ViewModelBuilder::class
-    ])
+    @ContributesAndroidInjector(
+        modules = [
+            ViewModelBuilder::class
+        ]
+    )
     internal abstract fun imagesFragment(): ImageListFragment
 
     @Binds

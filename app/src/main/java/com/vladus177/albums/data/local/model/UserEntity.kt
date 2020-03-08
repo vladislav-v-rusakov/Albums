@@ -22,21 +22,21 @@ import com.vladus177.albums.data.Constants.USER_ZIPCODE
 
 @Entity(tableName = "users")
 data class UserEntity @JvmOverloads constructor(
-    @PrimaryKey @ColumnInfo(name = USER_ID) var id: Long = 0,
-    @ColumnInfo(name = USER_NAME) var userName: String = "",
-    @ColumnInfo(name = USER_ALIAS) var userAlias: String = "",
-    @ColumnInfo(name = USER_EMAIL) var userEmail: String = "",
-    @ColumnInfo(name = USER_STREET) var userStreet: String = "",
-    @ColumnInfo(name = USER_SUITE) var userSuite: String = "",
-    @ColumnInfo(name = USER_CITY) var userCity: String = "",
-    @ColumnInfo(name = USER_ZIPCODE) var userZipCode: String = "",
-    @ColumnInfo(name = USER_LAT) var userLat: String = "",
-    @ColumnInfo(name = USER_LNG) var userLng: String = "",
-    @ColumnInfo(name = USER_PHONE) var userPhone: String = "",
-    @ColumnInfo(name = USER_WEBSITE) var userWebsite: String = "",
-    @ColumnInfo(name = USER_COMPANY_NAME) var userCompanyName: String = "",
-    @ColumnInfo(name = USER_CATCH_PHRASE) var userCatchPhrase: String = "",
-    @ColumnInfo(name = USER_BS) var userBs: String = "",
+    @PrimaryKey @ColumnInfo(name = USER_ID) var id: Long? = 0,
+    @ColumnInfo(name = USER_NAME) var userName: String? = "",
+    @ColumnInfo(name = USER_ALIAS) var userAlias: String? = "",
+    @ColumnInfo(name = USER_EMAIL) var userEmail: String? = "",
+    @ColumnInfo(name = USER_STREET) var userStreet: String? = "",
+    @ColumnInfo(name = USER_SUITE) var userSuite: String? = "",
+    @ColumnInfo(name = USER_CITY) var userCity: String? = "",
+    @ColumnInfo(name = USER_ZIPCODE) var userZipCode: String? = "",
+    @ColumnInfo(name = USER_LAT) var userLat: String? = "",
+    @ColumnInfo(name = USER_LNG) var userLng: String? = "",
+    @ColumnInfo(name = USER_PHONE) var userPhone: String? = "",
+    @ColumnInfo(name = USER_WEBSITE) var userWebsite: String? = "",
+    @ColumnInfo(name = USER_COMPANY_NAME) var userCompanyName: String? = "",
+    @ColumnInfo(name = USER_CATCH_PHRASE) var userCatchPhrase: String? = "",
+    @ColumnInfo(name = USER_BS) var userBs: String? = "",
     @ColumnInfo(name = USER_IS_FAVORITE) var isFavorite: Boolean = false
 
 ) {

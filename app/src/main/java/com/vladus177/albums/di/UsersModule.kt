@@ -10,9 +10,11 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class UsersModule {
-    @ContributesAndroidInjector(modules = [
-        ViewModelBuilder::class
-    ])
+    @ContributesAndroidInjector(
+        modules = [
+            ViewModelBuilder::class
+        ]
+    )
     internal abstract fun tasksFragment(): UserListFragment
 
     @Binds

@@ -1,12 +1,12 @@
 package com.vladus177.albums.di
 
 import android.content.Context
-import android.util.Log
 import dagger.Module
 import okhttp3.logging.HttpLoggingInterceptor
 import dagger.Provides
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import timber.log.Timber
 import java.io.File
 
 
@@ -14,7 +14,10 @@ import java.io.File
 class OkHttpClientModule {
 
     @Provides
-    fun provideOkHttpClient(cache: Cache, httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideOkHttpClient(
+        cache: Cache,
+        httpLoggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
         return OkHttpClient()
             .newBuilder()
             .cache(cache)
@@ -38,7 +41,7 @@ class OkHttpClientModule {
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
-                Log.i("HttpLoggingInterceptor", message)
+                Timber.i(message)
             }
         })
         httpLoggingInterceptor.apply {

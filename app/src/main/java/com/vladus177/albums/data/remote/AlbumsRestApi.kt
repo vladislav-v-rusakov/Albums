@@ -4,23 +4,18 @@ import com.vladus177.albums.data.remote.model.AlbumEntry
 import com.vladus177.albums.data.remote.model.ImageEntry
 import retrofit2.http.GET
 import com.vladus177.albums.data.remote.model.UserEntry
+import io.reactivex.Observable
 import retrofit2.http.Query
 
 interface AlbumsRestApi {
 
     @GET("/users")
-    suspend fun getAllUsers(): List<UserEntry>
+    fun getAllUsers(): Observable<List<UserEntry>>
 
     @GET("/albums")
-    suspend fun getAllAlbums(): List<AlbumEntry>
-
-    @GET("/albums")
-    suspend fun getAlbumsByUserId(@Query("userId") userId: Long): List<AlbumEntry>
+    fun getAlbumsByUserId(@Query("userId") userId: Long): Observable<List<AlbumEntry>>
 
     @GET("/photos")
-    suspend fun getAllImages(): List<ImageEntry>
-
-    @GET("/photos")
-    suspend fun getImagesByAlbumId(@Query("albumId") albumId: Long): List<ImageEntry>
+    fun getImagesByAlbumId(@Query("albumId") albumId: Long): Observable<List<ImageEntry>>
 
 }

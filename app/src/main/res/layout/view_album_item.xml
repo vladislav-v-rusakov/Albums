@@ -22,9 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@{album.title}"
             android:drawableStart="@drawable/ic_photo_album_24dp"
             android:drawablePadding="@dimen/space_small"
+            android:text="@{album.title}"
             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
     </LinearLayout>
 </layout>

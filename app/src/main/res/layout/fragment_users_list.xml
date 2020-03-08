@@ -1,17 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="androidx.core.content.ContextCompat" />
-
-        <variable
-            name="viewmodel"
-            type="com.vladus177.albums.presentation.UserListViewModel" />
-
-    </data>
-
-
     <LinearLayout
         android:id="@+id/ll_user_list"
         android:layout_width="match_parent"
@@ -20,9 +9,9 @@
 
         <com.vladus177.albums.common.view.DynamicInformation
             android:id="@+id/di_user_info"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_list"

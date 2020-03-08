@@ -5,28 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.vladus177.albums.common.extension.observe
 import com.vladus177.albums.databinding.FragmentUsersListBinding
 import com.vladus177.albums.presentation.UserListViewModel
 import com.vladus177.albums.ui.adapter.UsersListAdapter
-import com.vladus177.albums.common.Result
-import com.vladus177.albums.domain.model.UserModel
-import com.vladus177.albums.ui.mapper.UserViewMapper
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.vladus177.albums.common.Resource
+import com.vladus177.albums.common.ResourceState
 import com.vladus177.albums.common.view.DynamicInformation
 import com.vladus177.albums.common.util.NetworkStateManager
 import com.vladus177.albums.ui.adapter.OnItemClickListener
+import com.vladus177.albums.ui.model.UserView
 
 
 class UserListFragment : DaggerFragment(), OnItemClickListener {
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-    @Inject lateinit var usersListMapper: UserViewMapper
-    @Inject lateinit var networkStateManager: NetworkStateManager
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var networkStateManager: NetworkStateManager
 
     private val viewModel by viewModels<UserListViewModel> { viewModelFactory }
     private lateinit var viewDataBinding: FragmentUsersListBinding
@@ -37,11 +38,9 @@ class UserListFragment : DaggerFragment(), OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding = FragmentUsersListBinding.inflate(inflater, container, false).apply {
-            viewmodel = viewModel
-        }
+        viewDataBinding = FragmentUsersListBinding.inflate(inflater, container, false)
         dynamicInfo = viewDataBinding.diUserInfo
-        dynamicInfo.setActionButtonClickListener(clickListener = { loadUserList(true) })
+        dynamicInfo.setActionButtonClickListener(clickListener = { loadUserList(false) })
         return viewDataBinding.root
     }
 
@@ -49,46 +48,29 @@ class UserListFragment : DaggerFragment(), OnItemClickListener {
         super.onActivityCreated(savedInstanceState)
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
         setupListAdapter()
-        setupObserver()
-        if (networkStateManager.isConnectedOrConnecting) {
-            loadUserList(true)
-        } else {
-            dynamicInfo.showConnectionError()
-        }
+        viewModel.users.observe(viewLifecycleOwner, Observer { updateUsers(it) })
+        loadUserList(networkStateManager.isConnectedOrConnecting)
     }
 
     private fun loadUserList(forceUpdate: Boolean) {
         viewModel.loadUserList(forceUpdate)
     }
 
-    private fun setupObserver() {
-        with(viewModel) {
-            observe(userLiveData, ::userDataObserver)
-        }
-    }
-
-    private fun userDataObserver(result: Result<List<UserModel>>?) {
-        when (result) {
-            is Result.OnLoading -> {
-                dynamicInfo.showLoading()
-            }
-            is Result.OnSuccess -> {
-                dynamicInfo.hideLoading()
-                val userList = with(usersListMapper) {
-                    result.value.map {
-                        it.fromDomainToView()
+    private fun updateUsers(resource: Resource<List<UserView>>?) {
+        resource?.let {
+            when (it.state) {
+                ResourceState.LOADING -> dynamicInfo.showLoading()
+                ResourceState.SUCCESS -> {
+                    dynamicInfo.hideLoading()
+                    it.data?.let {
+                        if (it.isEmpty() && !networkStateManager.isConnectedOrConnecting) {
+                            dynamicInfo.showConnectionError()
+                        }
                     }
                 }
-                listAdapter.submitList(userList)
+                ResourceState.ERROR -> dynamicInfo.showError()
             }
-            is Result.OnEmpty -> {
-            }
-            is Result.OnError -> {
-                dynamicInfo.hideLoading()
-            }
-            else -> {
-                dynamicInfo.hideLoading()
-            }
+            it.data?.let { listAdapter.submitList(it) }
         }
     }
 

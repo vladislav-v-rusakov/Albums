@@ -1,5 +1,6 @@
 package com.vladus177.albums.data.mapper
 
+import com.vladus177.albums.data.local.model.UserEntity
 import com.vladus177.albums.data.remote.model.AddressEntry
 import com.vladus177.albums.data.remote.model.CompanyEntry
 import com.vladus177.albums.data.remote.model.LocationEntry
@@ -11,6 +12,42 @@ import com.vladus177.albums.domain.model.UserModel
 import javax.inject.Inject
 
 class UserDataMapper @Inject constructor() {
+
+    fun UserModel.fromDomaimToEntity() = UserEntity(
+        id = id,
+        userName = username,
+        userAlias = name,
+        userEmail = email,
+        userStreet = address?.street,
+        userSuite = address?.suite,
+        userCity = address?.city,
+        userZipCode = address?.zipcode,
+        userLat = address?.location?.latitude,
+        userLng = address?.location?.longitude,
+        userPhone = phone,
+        userWebsite = website,
+        userCompanyName = company?.name,
+        userCatchPhrase = company?.catchPhrase,
+        userBs = company?.bs
+    )
+
+    fun UserEntity.fromEntityToDomain() = UserModel(
+        id = id,
+        name = userName,
+        username = userAlias,
+        email = userEmail,
+        address = AddressModel(
+            userStreet,
+            userSuite,
+            userCity,
+            userZipCode,
+            LocationModel(userLat, userLng)
+        ),
+        phone = userPhone,
+        website = userWebsite,
+        company = CompanyModel(userCompanyName, userCatchPhrase, userBs),
+        isFavorite = isFavorite
+    )
 
     fun UserEntry.fromDataToDomain() = UserModel(
         id = id,

@@ -10,15 +10,18 @@ import com.vladus177.albums.data.local.model.AlbumEntity
 interface AlbumDao {
 
     @Query("SELECT * FROM Albums")
-    suspend fun getAllAlbums(): List<AlbumEntity>
-
-    @Query("SELECT * FROM Albums WHERE userId = :userId")
-    suspend fun getAlbumsByUserId(userId: Long): List<AlbumEntity>
-
-    @Query("SELECT * FROM Albums WHERE id = :albumId")
-    suspend fun getAlbumById(albumId: Long): AlbumEntity?
+    fun getAllAlbums(): List<AlbumEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAlbum(album: AlbumEntity)
+    fun insertAll(albums: List<AlbumEntity>)
+
+    @Query("SELECT * FROM Albums WHERE userId = :userId")
+    fun getAlbumsByUserId(userId: Long): List<AlbumEntity>
+
+    @Query("SELECT * FROM Albums WHERE id = :albumId")
+    fun getAlbumById(albumId: Long): AlbumEntity?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAlbum(album: AlbumEntity)
 
 }
