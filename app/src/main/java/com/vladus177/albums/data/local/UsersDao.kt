@@ -17,7 +17,7 @@ interface UsersDao {
     fun insertAll(users: List<UserEntity>)
 
     @Query("UPDATE Users SET favorite = :favorite WHERE id = :userId")
-    fun updateFavorite(userId: Long, favorite: Boolean)
+    fun updateFavorite(userId: Long, favorite: Boolean) : Completable
 
     @Query("SELECT * FROM Users WHERE id = :userId")
     fun getUserById(userId: Long): UserEntity?

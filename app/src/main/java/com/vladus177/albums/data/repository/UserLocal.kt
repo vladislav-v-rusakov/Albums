@@ -1,6 +1,7 @@
 package com.vladus177.albums.data.repository
 
 import com.vladus177.albums.domain.model.UserModel
+import io.reactivex.Completable
 import io.reactivex.Observable
 
 interface UserLocal {
@@ -9,5 +10,5 @@ interface UserLocal {
 
     fun insertAll(users: List<UserModel>)
 
-    fun insertUser(user: UserModel)
+    fun setFavoriteUser(userId: Long, favorite: Boolean) : Completable
 }

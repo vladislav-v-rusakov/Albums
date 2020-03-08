@@ -10,12 +10,16 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import io.reactivex.schedulers.Schedulers
 import com.vladus177.albums.domain.model.UserModel
+import io.reactivex.Completable
 
 
 @Singleton
 class UserDataRepository @Inject constructor(
     private val factory: UserDataSourceFactory
 ) : UserRepository {
+
+
+    override fun setFavoriteUser(userId: Long, favorite: Boolean): Completable = factory.getLocal().setFavoriteUser(userId, favorite)
 
 
     override fun getUserList(forceUpdate: Boolean): Observable<List<UserModel>> {
@@ -30,10 +34,6 @@ class UserDataRepository @Inject constructor(
         } else {
             factory.getLocal().getUserList()
         }
-    }
-
-    override fun insertUser(user: UserModel) {
-        factory.getLocal().insertUser(user)
     }
 
     override fun insertAll(users: List<UserModel>) = factory.getLocal().insertAll(users)

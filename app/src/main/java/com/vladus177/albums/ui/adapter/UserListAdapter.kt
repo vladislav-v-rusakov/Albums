@@ -26,7 +26,7 @@ class UsersListAdapter(private val itemClickListener: OnItemClickListener) :
         fun bind(item: UserView, clickListener: OnItemClickListener) {
             binding.user = item
             binding.llItemView.setOnClickListener { clickListener.onItemClicked(item.id) }
-            binding.ivFavorite.setOnClickListener{clickListener.onFavoriteClicked(item.id, !item.isFavorite) }
+            binding.ivFavorite.setOnClickListener{clickListener.onFavoriteClicked(item.id!!, !item.isFavorite) }
             binding.executePendingBindings()
         }
 
@@ -40,11 +40,11 @@ class UsersListAdapter(private val itemClickListener: OnItemClickListener) :
     }
 }
 
-interface OnItemClickListener{
+interface OnItemClickListener {
 
     fun onItemClicked(userId: Long?)
 
-    fun onFavoriteClicked(userId: Long?, favorite: Boolean)
+    fun onFavoriteClicked(userId: Long, favorite: Boolean)
 }
 
 class TaskDiffCallback : DiffUtil.ItemCallback<UserView>() {

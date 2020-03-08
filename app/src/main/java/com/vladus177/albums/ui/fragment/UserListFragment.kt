@@ -82,7 +82,7 @@ class UserListFragment : DaggerFragment(), OnItemClickListener {
         }
     }
 
-    override fun onFavoriteClicked(userId: Long?, favorite: Boolean) {
+    override fun onFavoriteClicked(userId: Long, favorite: Boolean) {
         viewModel.setFavorite(userId, favorite)
     }
 

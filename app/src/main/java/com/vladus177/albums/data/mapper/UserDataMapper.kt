@@ -13,10 +13,10 @@ import javax.inject.Inject
 
 class UserDataMapper @Inject constructor() {
 
-    fun UserModel.fromDomaimToEntity() = UserEntity(
+    fun UserModel.fromDomainToEntity() = UserEntity(
         id = id,
-        userName = username,
-        userAlias = name,
+        userName = name,
+        userAlias = username,
         userEmail = email,
         userStreet = address?.street,
         userSuite = address?.suite,
