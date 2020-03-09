@@ -42,7 +42,11 @@ class AlbumListFragment : DaggerFragment(), OnAlbumItemClickListener {
     ): View? {
         viewDataBinding = FragmentAlbumListBinding.inflate(inflater, container, false)
         dynamicInfo = viewDataBinding.diAlbumInfo
-        dynamicInfo.setActionButtonClickListener(clickListener = { loadAlbumsList(false) })
+        dynamicInfo.setActionButtonClickListener(clickListener = {
+            loadAlbumsList(
+                networkStateManager.isConnectedOrConnecting
+            )
+        })
         return viewDataBinding.root
     }
 

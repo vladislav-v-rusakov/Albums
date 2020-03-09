@@ -44,7 +44,7 @@ class ImageListFragment : DaggerFragment() {
     ): View? {
         viewDataBinding = FragmentImageListBinding.inflate(inflater, container, false)
         dynamicInfo = viewDataBinding.diImageInfo
-        dynamicInfo.setActionButtonClickListener(clickListener = { loadImageList(false) })
+        dynamicInfo.setActionButtonClickListener(clickListener = { loadImageList(networkStateManager.isConnectedOrConnecting) })
         return viewDataBinding.root
     }
 

@@ -22,7 +22,7 @@ import com.vladus177.albums.ui.adapter.OnItemClickListener
 import com.vladus177.albums.ui.model.UserView
 
 
-class UserListFragment : DaggerFragment(), OnItemClickListener {
+open class UserListFragment : DaggerFragment(), OnItemClickListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -40,7 +40,7 @@ class UserListFragment : DaggerFragment(), OnItemClickListener {
     ): View? {
         viewDataBinding = FragmentUsersListBinding.inflate(inflater, container, false)
         dynamicInfo = viewDataBinding.diUserInfo
-        dynamicInfo.setActionButtonClickListener(clickListener = { loadUserList(false) })
+        dynamicInfo.setActionButtonClickListener(clickListener = { loadUserList(networkStateManager.isConnectedOrConnecting) })
         return viewDataBinding.root
     }
 
