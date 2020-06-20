@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import dagger.Provides
 import com.squareup.picasso.Picasso
 import dagger.Module
+import java.util.concurrent.TimeUnit
 
 @Module
 class PicassoModule {
@@ -16,8 +17,12 @@ class PicassoModule {
     }
 
     @Provides
-    fun provideOkHttp3Downloader(okHttpClient: OkHttpClient): OkHttp3Downloader {
-        return OkHttp3Downloader(okHttpClient)
+    fun provideOkHttp3Downloader(): OkHttp3Downloader {
+        val okHttpBuilder = OkHttpClient
+            .Builder()
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+        return OkHttp3Downloader(okHttpBuilder.build())
     }
 
 }

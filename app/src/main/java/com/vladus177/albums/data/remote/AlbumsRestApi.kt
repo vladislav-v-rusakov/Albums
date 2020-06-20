@@ -9,13 +9,13 @@ import retrofit2.http.Query
 
 interface AlbumsRestApi {
 
-    @GET("/users")
+    @GET("users")
     fun getAllUsers(): Observable<List<UserEntry>>
 
-    @GET("/albums")
+    @GET("albums")
     fun getAlbumsByUserId(@Query("userId") userId: Long): Observable<List<AlbumEntry>>
 
-    @GET("/photos")
+    @GET("photos")
     fun getImagesByAlbumId(@Query("albumId") albumId: Long): Observable<List<ImageEntry>>
 
 }

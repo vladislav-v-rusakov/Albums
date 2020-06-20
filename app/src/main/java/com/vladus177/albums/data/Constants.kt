@@ -2,8 +2,6 @@ package com.vladus177.albums.data
 
 object Constants {
 
-    const val BASE_URL = "https://jsonplaceholder.typicode.com"
-
     //User
     const val USER_ID = "id"
     const val USER_NAME = "name"
