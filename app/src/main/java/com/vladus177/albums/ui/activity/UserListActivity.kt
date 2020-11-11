@@ -1,6 +1,5 @@
 package com.vladus177.albums.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -8,8 +7,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.vladus177.albums.R
+import dagger.android.support.DaggerAppCompatActivity
 
-class UserListActivity : AppCompatActivity() {
+class UserListActivity : DaggerAppCompatActivity() {
+
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {

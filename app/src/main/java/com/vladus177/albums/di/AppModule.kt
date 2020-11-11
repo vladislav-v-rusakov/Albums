@@ -11,16 +11,17 @@ import dagger.Module
 import dagger.Provides
 
 
-@Module
-object ApplicationModule {
 
-    @JvmStatic
+@Module(includes = [
+    ViewModelModule::class
+])
+class AppModule {
+
     @Provides
     fun provideNetworkStateManager(context: Context): NetworkStateManager {
         return NetworkStateManager(context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager)
     }
 
-    @JvmStatic
     @Provides
     fun provideImageListAdapter(picasso: Picasso): ImageListAdapter {
         return ImageListAdapter(picasso)

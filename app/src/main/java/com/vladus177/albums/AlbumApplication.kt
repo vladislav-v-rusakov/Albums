@@ -1,14 +1,11 @@
 package com.vladus177.albums
 
-import com.vladus177.albums.di.DaggerApplicationComponent
+import com.vladus177.albums.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 
 
-open class AlbumApplication : DaggerApplication() {
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-
-        return DaggerApplicationComponent.factory().create(applicationContext)
-    }
+class AlbumApplication : DaggerApplication() {
+    private val applicationInjector = DaggerAppComponent.builder().application(this).build()
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> = applicationInjector
 }
