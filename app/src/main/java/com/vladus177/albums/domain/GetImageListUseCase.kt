@@ -6,7 +6,7 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class GetImageListUseCase @Inject constructor(
-    private val repository: ImageRepository
+    private val repository: AlbumRepository
 ) {
     fun getImageList(albumId: Long, forceUpdate: Boolean): Observable<List<ImageModel>> =
         repository.getImageList(albumId, forceUpdate)

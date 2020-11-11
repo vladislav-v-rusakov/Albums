@@ -4,7 +4,7 @@ import com.vladus177.albums.domain.model.UserModel
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetUserListUseCase @Inject constructor(private val repository: UserRepository) {
+class GetUserListUseCase @Inject constructor(private val repository: AlbumRepository) {
     fun getUserList(forceUpdate: Boolean): Observable<List<UserModel>> =
         repository.getUserList(forceUpdate)
 }

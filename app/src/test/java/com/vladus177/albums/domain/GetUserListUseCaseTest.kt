@@ -9,7 +9,7 @@ import org.junit.Test
 
 class GetUserListUseCaseTest {
 
-    private val repository = mock<UserRepository>()
+    private val repository = mock<AlbumRepository>()
     private val getDepositsUseCase = GetUserListUseCase(repository)
 
     @Test

@@ -6,18 +6,12 @@ import com.vladus177.albums.BuildConfig
 import com.vladus177.albums.common.PostExecutionThread
 import com.vladus177.albums.common.UiThread
 import com.vladus177.albums.common.util.FakeInterceptor
-import com.vladus177.albums.data.AlbumDataRepository
-import com.vladus177.albums.data.ImageDataRepository
-import com.vladus177.albums.data.UserDataRepository
+import com.vladus177.albums.data.repository.AlbumsDataRepository
 import com.vladus177.albums.data.local.*
-import com.vladus177.albums.data.remote.AlbumRemoteRepositoryImpl
+import com.vladus177.albums.data.remote.AlbumRemoteSourceRepositoryImpl
 import com.vladus177.albums.data.remote.AlbumsRestApi
-import com.vladus177.albums.data.remote.ImageRemoteRepositoryImpl
-import com.vladus177.albums.data.remote.UserRemoteRepositoryImpl
 import com.vladus177.albums.data.repository.*
 import com.vladus177.albums.domain.AlbumRepository
-import com.vladus177.albums.domain.ImageRepository
-import com.vladus177.albums.domain.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -115,35 +109,14 @@ class DataModule {
 @Module
 abstract class DataModuleBinds {
 
+    @Binds
+    abstract fun bindAlbumDataRepository(dataRepository: AlbumsDataRepository): AlbumRepository
 
     @Binds
-    abstract fun bindUserDataRepository(dataRepository: UserDataRepository): UserRepository
+    abstract fun bindAlbumLocal(albumLocal: AlbumsLocalSourceRepositoryImpl): AlbumsLocalSource
 
     @Binds
-    abstract fun bindUserLocal(userLocal: UserLocalRepositoryImpl): UserLocal
-
-    @Binds
-    abstract fun bindUserRemote(userRemote: UserRemoteRepositoryImpl): UserRemote
-
-    @Binds
-    abstract fun bindAlbumDataRepository(dataRepository: AlbumDataRepository): AlbumRepository
-
-    @Binds
-    abstract fun bindAlbumLocal(albumLocal: AlbumLocalRepositoryImpl): AlbumLocal
-
-    @Binds
-    abstract fun bindAlbumRemote(albumRemote: AlbumRemoteRepositoryImpl): AlbumRemote
-
-
-    @Binds
-    abstract fun bindImageDataRepository(dataRepository: ImageDataRepository): ImageRepository
-
-    @Binds
-    abstract fun bindImageLocal(imageLocal: ImageLocalRepositoryImpl): ImageLocal
-
-    @Binds
-    abstract fun bindImageRemote(imageRemote: ImageRemoteRepositoryImpl): ImageRemote
-
+    abstract fun bindAlbumRemote(albumRemote: AlbumRemoteSourceRepositoryImpl): AlbumRemoteSource
 
     @Binds
     abstract fun bindPostExecutionThread(uiThread: UiThread): PostExecutionThread

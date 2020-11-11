@@ -1,4 +1,4 @@
-package com.vladus177.albums.data
+package com.vladus177.albums.common
 
 sealed class Result<T> {
     data class Success<T>(val value: T) : Result<T>()
