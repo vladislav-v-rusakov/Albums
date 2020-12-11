@@ -2,6 +2,7 @@ package com.vladus177.albums.di
 
 import android.content.Context
 import androidx.room.Room
+import com.google.gson.GsonBuilder
 import com.vladus177.albums.BuildConfig
 import com.vladus177.albums.common.PostExecutionThread
 import com.vladus177.albums.common.UiThread
@@ -10,6 +11,8 @@ import com.vladus177.albums.data.repository.AlbumsDataRepository
 import com.vladus177.albums.data.local.*
 import com.vladus177.albums.data.remote.AlbumRemoteSourceRepositoryImpl
 import com.vladus177.albums.data.remote.AlbumsRestApi
+import com.vladus177.albums.data.remote.converter.UserDeserializer
+import com.vladus177.albums.data.remote.model.UserEntry
 import com.vladus177.albums.data.repository.*
 import com.vladus177.albums.domain.AlbumRepository
 import dagger.Binds
@@ -53,11 +56,13 @@ class DataModule {
             okHttpBuilder.addInterceptor(FakeInterceptor(context))
         }
 
+        val userDeserializer =
+            GsonBuilder().registerTypeAdapter(UserEntry::class.java, UserDeserializer()).create()
 
         return Retrofit.Builder()
             .client(okHttpBuilder.build())
             .baseUrl(BuildConfig.URL_BASE)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(userDeserializer))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
             .create(AlbumsRestApi::class.java)
